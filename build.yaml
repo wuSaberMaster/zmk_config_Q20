@@ -12,7 +12,8 @@
 #     shield: reviung41
 ---
 include:
-  - board: nice_nano_v2     # ← 你的实际开发板，比如 nice_nano_v2 / nrfmicro_13 / etc.
+  - board: bbq20     # ← 你的实际开发板，比如 nice_nano_v2 / nrfmicro_13 / etc.
     shield: bbq20           # ← 你的键盘/Shield 名
     cmake-args: -DCONFIG_BUILD_OUTPUT_HEX=y -DCONFIG_BUILD_OUTPUT_BIN=y
+
 
