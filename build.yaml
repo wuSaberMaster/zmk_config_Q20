@@ -12,11 +12,12 @@
 #     shield: reviung41
 ---
 include:
-  - board: nice_nano_v2
+  - board: bbq20
     shield: bbq20
     cmake-args: >-
       -DCONFIG_BUILD_OUTPUT_HEX=y
       -DCONFIG_BUILD_OUTPUT_BIN=y
+
 
 
 
