@@ -12,8 +12,10 @@
 #include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/ext_power.h>
 
+
 #define SYM 1
 #define UPPER 2
+
 
 / {
     behaviors {
@@ -23,14 +25,17 @@
             tapping-term-ms = <400>;
             bindings = <&mkp LCLK>, <&bt BT_CLR>;
         };
-        
+    };
+    behaviors {
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <500>;
             bindings = <&out &kp>;
         };
+    };
 
+    behaviors {
         bhm: balanced_homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -44,86 +49,48 @@
         compatible = "zmk,keymap";
 
         default_layer {
+
             bindings = <
-                // Row 0 (物理位置)
-                &mkp LCLK &none    &none    &none    &none    &none    &mkp RCLK
-                
-                // Row 1  
-                &kp CLCK  &kp LGUI &none    &mkp LCLK &mt ESC K_BACK &none &kp TAB
-                
-                // Row 2
-                &bhm HASH Q &bhm N1 W &bhm N2 E &bhm N3 R &bhm LPAR T &none &none
-                
-                // Row 3  
-                &bhm RPAR Y &bhm UNDER U &bhm MINUS I &bhm PLUS O &bhm AT P &none &none
-                
-                // Row 4
-                &bhm STAR A &bhm N4 S &bhm N5 D &bhm N6 F &bhm SLASH G &none &none
-                
-                // Row 5
-                &bhm COLON H &bhm SEMI J &bhm APOS K &bhm DQT L &kp BSPC &none &none
-                
-                // Row 6
-                &kp LSHFT &bhm N7 Z &bhm N8 X &bhm N9 C &bhm QMARK V &none &none
-                
-                // Row 7
-                &bhm EXCL B &bhm COMMA N &bhm DOT M &kp SEMI &kp ENTER &kp LCTRL &kp LALT
+//         --------------------------------------------------------------------------------------------------------------------------         
+//         |    Shoulder Key1    |                                                                             |    Shoulder Key2    |     
+// |         Call key      |      Blackberry Key        |    Trackpad    |             Back Key                |             Endcall Key          |
+// |     Q      |     W    |     E    |     R    |      T      |       Y        |       U        |        I        |       O      |      P        |     
+// |     A      |     S    |     D    |     F    |      G      |       H        |       J        |        K        |       L      |      ←        |  
+// |     alt    |     Z    |     X    |     C    |      V      |       B        |       N        |        M        |       $      |    Enter      |   
+//        |         aA     |         0           |           SPACE              |         SYM         |        aA          |       
+//        -----------------------------------------------------------------------------------------------------------------
+
+                 &mkp LCLK                                                                                             &mkp RCLK
+    &kp CLCK                &kp LGUI                            &mkp LCLK                          &mt ESC K_BACK                    &kp TAB
+    &bhm HASH Q  &bhm N1 W  &bhm N2 E  &bhm N3 R  &bhm LPAR T   &bhm RPAR Y        &bhm UNDER U    &bhm MINUS I        &bhm PLUS O   &bhm AT P
+    &bhm STAR A  &bhm N4 S  &bhm N5 D  &bhm N6 F  &bhm SLASH G  &bhm COLON H       &bhm SEMI J     &bhm APOS K         &bhm DQT L    &kp BSPC
+    &kp LSHFT    &bhm N7 Z  &bhm N8 X  &bhm N9 C  &bhm QMARK V  &bhm EXCL B        &bhm COMMA N    &bhm DOT M          &kp SEMI      &kp ENTER
+    &kp LCTRL               &kp LALT                            &kp SPACE                          &tog SYM                          &tog UPPER
             >;
         };
 
+
         sym_layer {
-            bindings = <
-                // Row 0
-                &kp C_VOL_UP &none &none &none &none &none &kp C_VOL_DN
-                
-                // Row 1
-                &kp PSCRN &kp C_AC_SEARCH &none &mkp LCLK &kp F5 &none &kp F12
-                
-                // Row 2
-                &kp HASH &kp N1 &kp N2 &kp N3 &mt LBKT LPAR &none &none
-                
-                // Row 3
-                &mt RBKT RPAR &kp UNDER &kp MINUS &kp PLUS &kp AT &none &none
-                
-                // Row 4
-                &kp STAR &kp N4 &kp N5 &kp N6 &kp SLASH &none &none
-                
-                // Row 5
-                &kp COLON &kp SEMI &kp APOS &kp DQT &kp DEL &none &none
-                
-                // Row 6
-                &kp LSHFT &kp N7 &kp N8 &kp N9 &kp QMARK &none &none
-                
-                // Row 7
-                &kp EXCL &kp COMMA &kp DOT &kp C_MUTE &kp ENTER &kp LCTRL &kp N0
+
+            bindings = <        
+                 &kp C_VOL_UP                                                                                       &kp C_VOL_DN
+    &kp PSCRN               &kp C_AC_SEARCH                     &mkp LCLK                          &kp F5                            &kp F12 
+    &kp HASH     &kp N1     &kp N2      &kp N3    &mt LBKT LPAR &mt RBKT RPAR     &kp UNDER        &kp MINUS        &kp PLUS         &kp AT
+    &kp STAR     &kp N4     &kp N5      &kp N6    &kp SLASH     &kp COLON         &kp SEMI         &kp APOS         &kp DQT          &kp DEL
+    &kp LSHFT    &kp N7     &kp N8      &kp N9    &kp QMARK     &kp EXCL          &kp COMMA        &kp DOT          &kp C_MUTE       &kp ENTER
+    &kp LCTRL               &kp N0                              &kp SPACE                          &tog SYM                          &tog UPPER
             >;
         };
 
         upper_layer {
+
             bindings = <
-                // Row 0
-                &msc SCRL_UP &none &none &none &none &none &msc SCRL_DOWN
-                
-                // Row 1
-                &bt BT_SEL 0 &bt BT_SEL 1 &none &td0 &bt BT_SEL 2 &none &bt BT_SEL 3
-                
-                // Row 2
-                &none &kp UP &none &sys_reset &ext_power EP_TOG &none &none
-                
-                // Row 3
-                &none &kp LT &kp GT &kp PIPE &kp KP_EQUAL &none &none
-                
-                // Row 4
-                &kp LEFT &kp DOWN &kp RIGHT &none &kp BSLH &none &none
-                
-                // Row 5
-                &kp AMPS &kp LBRC &kp RBRC &kp CARET &kp BSPC &none &none
-                
-                // Row 6
-                &kp LSHFT &none &none &none &bl BL_DEC &none &none
-                
-                // Row 7
-                &bl BL_TOG &bl BL_INC &none &bootloader &kp ENTER &kp LCTRL &kp LALT
+                 &msc SCRL_UP                                                                                       &msc SCRL_DOWN
+    &bt BT_SEL 0            &bt BT_SEL 1                             &td0                           &bt BT_SEL 2                     &bt BT_SEL 3
+    &none        &kp UP     &none       &sys_reset &ext_power EP_TOG &none         &kp LT           &kp GT          &kp PIPE         &kp KP_EQUAL
+    &kp LEFT     &kp DOWN   &kp RIGHT   &none      &kp BSLH          &kp AMPS      &kp LBRC         &kp RBRC        &kp CARET        &kp BSPC
+    &kp LSHFT    &none      &none       &none      &bl BL_DEC        &bl BL_TOG    &bl BL_INC       &none           &bootloader      &kp ENTER
+    &kp LCTRL               &kp LALT                                 &hm OUT_TOG SPACE              &tog SYM                         &tog UPPER
             >;
         };
     };
